@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <CountryDetail />
-    <CountriesList />
+    <CountriesList :countries="countries" />
+    <CountryDetail :countries="countries" />
   </div>
 </template>
 
 <script>
-import CountriesList from "./components/CountriesList.vue";
+import CountriesList from "./components/CountrySelector.vue";
 import CountryDetail from "./components/CountryDetail.vue";
 
 export default {
   name: "App",
+  data(){
+    return { countries: undefined };
+  },
+  mounted() {
+    fetch("https://restcountries.eu/rest/v2/all")
+      .then(res => res.json())
+      .then(data => this.countries = data);
+  },
   components: {
     CountriesList,
     CountryDetail
@@ -20,11 +28,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: whitesmoke;
+  font-family: "Alata";
 }
 </style>
