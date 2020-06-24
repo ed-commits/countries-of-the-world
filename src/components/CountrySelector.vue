@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     changed() {
-      console.dir(this.country);
       eventBus.$emit("CountrySelected", this.country);
     }
   },

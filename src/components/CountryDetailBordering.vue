@@ -20,13 +20,12 @@ function lookupObjectArrayByKey(obArray, key, value) {
 
 export default {
   name: "CountryDetailBordering",
-  data() {
-    return { borders: undefined };
-  },
-  mounted() {
-    this.borders = this.country.borders.map(code => {
+  computed: {
+    borders() {
+      return this.country.borders.map(code => {
       return lookupObjectArrayByKey(this.countries, "alpha3Code", code);
-    });
+      })
+    }
   },
   props: ["countries", "country"]
 };
