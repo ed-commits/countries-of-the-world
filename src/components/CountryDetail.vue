@@ -1,5 +1,5 @@
 <template>
-  <div>This is the country detail.</div>
+  <div><div v-if="country">This is the country detail.</div></div>
 </template>
 
 <script>
@@ -9,6 +9,16 @@ console.log(eventBus);
 
 export default {
   name: "CountryDetail",
+  data(){
+      return {
+          country: undefined
+      }
+  },
+  mounted(){
+      eventBus.$on('CountrySelected', (newCountry) => {
+          this.country = newCountry
+      })
+  }
 };
 </script>
 
