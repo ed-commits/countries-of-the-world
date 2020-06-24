@@ -11,7 +11,7 @@
 import ListComponent from "./ListComponent.vue";
 
 export default {
-  name: "countries-list",
+  name: "CountriesList",
   data() {
     return {
       items: []

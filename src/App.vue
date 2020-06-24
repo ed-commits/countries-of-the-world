@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <CountryDetail />
     <CountriesList />
   </div>
 </template>
 
 <script>
 import CountriesList from "./components/CountriesList.vue";
+import CountryDetail from "./components/CountryDetail.vue";
 
 export default {
   name: "App",
   components: {
-    CountriesList
+    CountriesList,
+    CountryDetail
   }
 };
 </script>
