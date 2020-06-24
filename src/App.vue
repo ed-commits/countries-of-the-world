@@ -2,12 +2,14 @@
   <div id="app">
     <CountriesList :countries="countries" />
     <CountryDetail :countries="countries" />
+    <WorldMapSVG />
   </div>
 </template>
 
 <script>
 import CountriesList from "./components/CountrySelector.vue";
 import CountryDetail from "./components/CountryDetail.vue";
+import WorldMapSVG from "./components/WorldMapSVG.vue";
 
 export default {
   name: "App",
@@ -21,7 +23,8 @@ export default {
   },
   components: {
     CountriesList,
-    CountryDetail
+    CountryDetail,
+    WorldMapSVG
   }
 };
 </script>

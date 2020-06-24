@@ -9,6 +9,7 @@
 <script>
 import CountrySelectorItem from "./CountrySelectorItem.vue";
 import { eventBus } from "../main.js";
+import { worldMapBus } from "../main.js";
 
 function lookupObjectArrayByKey(obArray, key, value) {
   return obArray.find(elt => elt[key] == value);
@@ -29,6 +30,7 @@ export default {
   methods: {
     changed() {
       eventBus.$emit("CountrySelected", this.country);
+      worldMapBus.$emit("CountrySelected", this.country);
     }
   },
   props: ['countries'],
