@@ -7,8 +7,8 @@
       <p>The languages spoken are:</p>
       <ul>
         <li v-for="(language, key) in country.languages" :key="key">
-          {{ language.name }} (
-          <i>{{ language.nativeName }}</i>).
+          {{ language.name }}
+          <i>({{ language.nativeName }})</i>.
         </li>
       </ul>
     </div>

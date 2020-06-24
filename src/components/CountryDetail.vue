@@ -5,8 +5,8 @@
         <img class="flagImage" :src="country.flag" />
       </div>
       <h2>
-        {{ country.name }} (
-        <i>{{ country.nativeName }}</i>)
+        {{ country.name }}
+        <i>({{ country.nativeName }})</i>
       </h2>
       <p>The capital of {{ country.name }} is {{ country.capital }}.</p>
       <p>
@@ -14,9 +14,9 @@
         population of {{ country.population }} in a region of size {{ country.area }} km
         <sup>2</sup>.
       </p>
-      <CountryDetailLanguages :country="country"/>
-      <CountryDetailCurrencies :country="country"/>
-      <CountryDetailBordering :countries="countries" :country="country"/>
+      <CountryDetailLanguages :country="country" />
+      <CountryDetailCurrencies :country="country" />
+      <CountryDetailBordering :countries="countries" :country="country" />
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
     CountryDetailCurrencies: CountryDetailCurrencies,
     CountryDetailBordering: CountryDetailBordering
   },
-  props: ['countries']
+  props: ["countries"]
 };
 </script>
 
