@@ -1,8 +1,13 @@
 <template>
   <div id="app">
+    <h1>Countries of the World!</h1>
+    <div class="card">
     <CountriesList :countries="countries" />
     <CountryDetail :countries="countries" />
+    </div>
+    <div class="card">
     <WorldMapSVG />
+    </div>
   </div>
 </template>
 
@@ -30,8 +35,25 @@ export default {
 </script>
 
 <style>
-#app {
+body {
   background-color: whitesmoke;
+}
+
+#app {
   font-family: "Alata";
 }
+
+h1 {
+  text-align: center;
+}
+
+.card {
+  padding: 20px;
+  width: 80%;
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0 .5em 2em rgba(0,0,0,0.3);
+  margin-bottom: 3em;
+}
+
 </style>
