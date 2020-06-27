@@ -1,4 +1,4 @@
-# week7-day3-vuecountries
+# countries-of-the-world
 
 ## Project setup
 ```

@@ -7001,7 +7001,7 @@ export default {
   methods: {
     display() {
       if(!this.country) return;
-      
+
       this.resetColors();
       this.colorCountry(this.country.alpha3Code);
       this.updateCrosshairs(this.country.latlng[0], this.country.latlng[1]);
@@ -7061,8 +7061,8 @@ export default {
     noZoom() {
       const xo = 0;
       const yo = 0;
-      const ws = 1110;
-      const hs = 594.8;
+      const ws = 1100;
+      const hs = 549.8;
       this.$el
         .querySelector("svg")
         .setAttribute("viewBox", `${xo} ${yo} ${ws} ${hs}`);
