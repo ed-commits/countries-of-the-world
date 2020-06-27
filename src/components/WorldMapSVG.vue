@@ -3,6 +3,7 @@
     <h3 v-if="coordinates">{{ coordinates }}</h3>
     <div class="svg-container">
       <svg
+        v-on:click="toggleZoom"
         viewBox="0 0 1100 549.8"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:svg="http://www.w3.org/2000/svg"
@@ -6984,17 +6985,37 @@ export default {
   data() {
     return {
       coloredCountries: [],
-      coordinates: undefined
+      coordinates: undefined,
+      x: undefined,
+      y: undefined,
+      country: undefined,
+      zoom: false
     };
   },
   mounted() {
     worldMapBus.$on("CountrySelected", country => {
-      this.resetColors();
-      this.colorCountry(country.alpha3Code);
-      this.updateCrosshairs(country.latlng[0], country.latlng[1]);
+      this.country = country;
+      this.display();
     });
   },
   methods: {
+    display() {
+      if(!this.country) return;
+      
+      this.resetColors();
+      this.colorCountry(this.country.alpha3Code);
+      this.updateCrosshairs(this.country.latlng[0], this.country.latlng[1]);
+      if (this.zoom) {
+        this.zoomIn(this.country.area);
+      }
+      else {
+        this.noZoom();
+      }
+    },
+    toggleZoom() {
+      this.zoom = !this.zoom;
+      this.display();
+    },
     colorCountry(code) {
       let cssSelector = `.${code}`;
       const svgCountries = this.$el.querySelectorAll(cssSelector);
@@ -7020,18 +7041,55 @@ export default {
       const lng_offset = +10;
       const x = (1100 * (lng + 180 - lng_offset)) / 360.0;
       const y = (549.8 * (90 - lat)) / 180.0;
+      this.x = x;
+      this.y = y;
       const svgVCrosshair = this.$el.querySelector("#v-crosshair");
       svgVCrosshair.setAttribute("x1", x);
       svgVCrosshair.setAttribute("x2", x);
+      svgVCrosshair.setAttribute("visibility", this.zoom ? "hidden" : "visible");
       const svgHCrosshair = this.$el.querySelector("#h-crosshair");
       svgHCrosshair.setAttribute("y1", y);
       svgHCrosshair.setAttribute("y2", y);
+      svgHCrosshair.setAttribute("visibility", this.zoom ? "hidden" : "visible");
+    },
+    hideCrosshairs() {
+      const svgVCrosshair = this.$el.querySelector("#v-crosshair");
+      const svgHCrosshair = this.$el.querySelector("#h-crosshair");
+      svgVCrosshair.style.setProperty("stroke", "none");
+      svgHCrosshair.style.setProperty("stroke", "none");
+    },
+    noZoom() {
+      const xo = 0;
+      const yo = 0;
+      const ws = 1110;
+      const hs = 594.8;
+      this.$el
+        .querySelector("svg")
+        .setAttribute("viewBox", `${xo} ${yo} ${ws} ${hs}`);
+    },
+    zoomIn(area) {
+      let w = 1100;
+      let h = 549.8;
+      let scale = (40 * area) / (510 * 1000000);
+      function clamp(val, min, max) {
+        if (val < min) return min;
+        if (val > max) return max;
+        return val;
+      }
+      scale = clamp(scale, 0.05, 1);
+      let ws = w * scale;
+      let hs = h * scale;
+      let xo = clamp(this.x - ws / 2, 0, w - ws);
+      let yo = clamp(this.y - hs / 2, 0, h - hs);
+      this.$el
+        .querySelector("svg")
+        .setAttribute("viewBox", `${xo} ${yo} ${ws} ${hs}`);
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .svg-container {
   padding: 2px;
   border: 1px solid black;

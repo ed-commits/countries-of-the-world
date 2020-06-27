@@ -6,7 +6,8 @@
     <CountryDetail :countries="countries" />
     </div>
     <div class="card">
-    <WorldMapSVG />
+    <WorldMapSVG/>
+    (Click to zoom in on the country)
     </div>
   </div>
 </template>
