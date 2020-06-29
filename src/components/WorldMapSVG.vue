@@ -7036,7 +7036,7 @@ export default {
       this.coloredCountries = [];
     },
     updateCrosshairs(lat, lng) {
-      this.coordinates = `Latitute ${lat} degrees, Longitude ${lng} degrees.`;
+      this.coordinates = `Latitude ${lat} degrees, Longitude ${lng} degrees.`;
       // equirectangular projection
       const lng_offset = +10;
       const x = (1100 * (lng + 180 - lng_offset)) / 360.0;
