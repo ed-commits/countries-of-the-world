@@ -1,5 +1,7 @@
 # countries-of-the-world
 
+![](Screenshot%20-%20countries%20of%20the%20world.png)
+
 ## Project setup
 ```
 npm install
